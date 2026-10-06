@@ -1,5 +1,6 @@
 import { ASSET_BILL_TYPE } from './constants/funding.js';
 import {
+  ActivateFeatureRequest,
   BillsHistoryArchiveRequest,
   ChangePositionMarginRequest,
   GetAccountBillSubtypesRequest,
@@ -983,6 +984,17 @@ export class RestClient extends BaseRestClient {
     }[]
   > {
     return this.postPrivate('/api/v5/account/activate-option');
+  }
+
+  /**
+   * Activate USDC order book trading after place order returns error 54109.
+   * Shared by the master account and its sub-accounts; one successful call is enough.
+   * Error 51773 means this activation is not supported for the account.
+   */
+  activateFeature(
+    params: ActivateFeatureRequest,
+  ): Promise<Record<string, never>[]> {
+    return this.postPrivate('/api/v5/account/activate-feature', params);
   }
 
   setAutoLoan(params: { autoLoan: boolean }): Promise<AutoLoanResult[]> {
