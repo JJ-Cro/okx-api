@@ -238,6 +238,10 @@ export interface WsPrivateChannelArgGridOther extends WsBaseRequestArg {
   algoId: string;
 }
 
+/**
+ * Pushes can be incremental: only instruments whose data changed.
+ * Merge the local cache by `instId`. Do not treat each push as the full set.
+ */
 export interface WsPublicChannelArgInstType extends WsBaseRequestArg {
   channel: 'instruments';
   instType: WsChannelArgInstType;

@@ -229,3 +229,8 @@ export interface GetMovePositionsHistoryRequest {
   limit?: string;
   state?: 'filled' | 'pending';
 }
+
+export interface ActivateFeatureRequest {
+  /** `1`: USDC order book trading. Call only when place order returns error 54109. */
+  feature: '1';
+}
