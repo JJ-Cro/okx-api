@@ -12,78 +12,79 @@ import { neverGuard } from './typeGuards.js';
 
 export const WS_LOGGER_CATEGORY = { category: 'okx-ws' };
 
+// Default WSS port 443. OKX disables WebSocket port 8443 on 31 Oct 2026.
 export const WS_BASE_URL_MAP: Record<
   APIMarket,
   Record<'live' | 'demo', Record<'public' | 'private' | 'business', string>>
 > = {
   prod: {
     live: {
-      public: 'wss://ws.okx.com:8443/ws/v5/public',
-      private: 'wss://ws.okx.com:8443/ws/v5/private',
+      public: 'wss://ws.okx.com/ws/v5/public',
+      private: 'wss://ws.okx.com/ws/v5/private',
       // Some channels require business suffix: https://www.okx.com/help/changes-to-v5-api-websocket-subscription-parameter-and-url
-      business: 'wss://ws.okx.com:8443/ws/v5/business',
+      business: 'wss://ws.okx.com/ws/v5/business',
     },
     demo: {
-      public: 'wss://wspap.okx.com:8443/ws/v5/public',
-      private: 'wss://wspap.okx.com:8443/ws/v5/private',
-      business: 'wss://wspap.okx.com:8443/ws/v5/business?brokerId=9999',
+      public: 'wss://wspap.okx.com/ws/v5/public',
+      private: 'wss://wspap.okx.com/ws/v5/private',
+      business: 'wss://wspap.okx.com/ws/v5/business?brokerId=9999',
     },
   },
   // Exactly the same as "prod"
   // also known as "www.okx.com", the default: https://www.okx.com/docs-v5/en/#overview-production-trading-services
   GLOBAL: {
     live: {
-      public: 'wss://ws.okx.com:8443/ws/v5/public',
-      private: 'wss://ws.okx.com:8443/ws/v5/private',
+      public: 'wss://ws.okx.com/ws/v5/public',
+      private: 'wss://ws.okx.com/ws/v5/private',
       // Some channels require business suffix: https://www.okx.com/help/changes-to-v5-api-websocket-subscription-parameter-and-url
-      business: 'wss://ws.okx.com:8443/ws/v5/business',
+      business: 'wss://ws.okx.com/ws/v5/business',
     },
     demo: {
-      public: 'wss://wspap.okx.com:8443/ws/v5/public',
-      private: 'wss://wspap.okx.com:8443/ws/v5/private',
-      business: 'wss://wspap.okx.com:8443/ws/v5/business?brokerId=9999',
+      public: 'wss://wspap.okx.com/ws/v5/public',
+      private: 'wss://wspap.okx.com/ws/v5/private',
+      business: 'wss://wspap.okx.com/ws/v5/business?brokerId=9999',
     },
   },
   // OKX Global REST at openapi.okx.com. WebSocket URLs unchanged (same as GLOBAL).
   OPENAPI_GLOBAL: {
     live: {
-      public: 'wss://ws.okx.com:8443/ws/v5/public',
-      private: 'wss://ws.okx.com:8443/ws/v5/private',
+      public: 'wss://ws.okx.com/ws/v5/public',
+      private: 'wss://ws.okx.com/ws/v5/private',
       // Some channels require business suffix: https://www.okx.com/help/changes-to-v5-api-websocket-subscription-parameter-and-url
-      business: 'wss://ws.okx.com:8443/ws/v5/business',
+      business: 'wss://ws.okx.com/ws/v5/business',
     },
     demo: {
-      public: 'wss://wspap.okx.com:8443/ws/v5/public',
-      private: 'wss://wspap.okx.com:8443/ws/v5/private',
-      business: 'wss://wspap.okx.com:8443/ws/v5/business?brokerId=9999',
+      public: 'wss://wspap.okx.com/ws/v5/public',
+      private: 'wss://wspap.okx.com/ws/v5/private',
+      business: 'wss://wspap.okx.com/ws/v5/business?brokerId=9999',
     },
   },
   // also known as "my.okx.com" https://my.okx.com/docs-v5/en/#overview-production-trading-services
   EEA: {
     live: {
-      public: 'wss://wseea.okx.com:8443/ws/v5/public',
-      private: 'wss://wseea.okx.com:8443/ws/v5/private',
+      public: 'wss://wseea.okx.com/ws/v5/public',
+      private: 'wss://wseea.okx.com/ws/v5/private',
       // Some channels require business suffix: https://www.okx.com/help/changes-to-v5-api-websocket-subscription-parameter-and-url
-      business: 'wss://wseea.okx.com:8443/ws/v5/business',
+      business: 'wss://wseea.okx.com/ws/v5/business',
     },
     demo: {
-      public: 'wss://wseeapap.okx.com:8443/ws/v5/public',
-      private: 'wss://wseeapap.okx.com:8443/ws/v5/private',
-      business: 'wss://wseeapap.okx.com:8443/ws/v5/business?brokerId=9999',
+      public: 'wss://wseeapap.okx.com/ws/v5/public',
+      private: 'wss://wseeapap.okx.com/ws/v5/private',
+      business: 'wss://wseeapap.okx.com/ws/v5/business?brokerId=9999',
     },
   },
   // also known as "app.okx.com" https://app.okx.com/docs-v5/en/#overview-production-trading-services
   US: {
     live: {
-      public: 'wss://wsus.okx.com:8443/ws/v5/public',
-      private: 'wss://wsus.okx.com:8443/ws/v5/private',
+      public: 'wss://wsus.okx.com/ws/v5/public',
+      private: 'wss://wsus.okx.com/ws/v5/private',
       // Some channels require business suffix: https://www.okx.com/help/changes-to-v5-api-websocket-subscription-parameter-and-url
-      business: 'wss://wsus.okx.com:8443/ws/v5/business',
+      business: 'wss://wsus.okx.com/ws/v5/business',
     },
     demo: {
-      public: 'wss://wsuspap.okx.com:8443/ws/v5/public',
-      private: 'wss://wsuspap.okx.com:8443/ws/v5/private',
-      business: 'wss://wsuspap.okx.com:8443/ws/v5/business?brokerId=9999',
+      public: 'wss://wsuspap.okx.com/ws/v5/public',
+      private: 'wss://wsuspap.okx.com/ws/v5/private',
+      business: 'wss://wsuspap.okx.com/ws/v5/business?brokerId=9999',
     },
   },
 };
